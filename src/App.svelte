@@ -1,5 +1,5 @@
-<script>
-    export let name;
+<script lang="ts">
+    export let name: string;
     let n = 0;
     function addn() {
         n++;
