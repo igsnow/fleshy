@@ -25,6 +25,20 @@
     >
 
     <a {href} target="_bank">百度</a>
+
+    {#if n % 2}
+        <p>n是奇数</p>
+    {/if}
+
+    {#if !(n % 2)}
+        <p>n是偶数</p>
+    {/if}
+
+    {#if n % 2}
+        <p>n居然是奇数</p>
+    {:else}
+        <p>n居然是偶数</p>
+    {/if}
 </main>
 
 <style>
