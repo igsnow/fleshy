@@ -1,10 +1,17 @@
 <script>
 	export let name;
+	let n = 0
+	function addn() {
+		n++
+		console.log('n ', n);
+	}
 </script>
 
 <main>
 	<h1>Hello {name}!</h1>
-	<p>Visit the <a href="https://svelte.dev/tutorial">Svelte tutorial</a> to learn how to build Svelte apps.</p>
+	
+
+	<button on:click={addn}>点击了{ n }次</button>
 </main>
 
 <style>
