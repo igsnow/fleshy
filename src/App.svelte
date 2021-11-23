@@ -1,4 +1,5 @@
 <script lang="ts">
+    import { list_store, Todo } from "./stores";
     export let name: string;
     let n = 0;
     function addn() {
@@ -15,6 +16,14 @@
     }
 
     const href = "http://www.baidu.com/";
+
+    let list: Todo[];
+
+    const unsubscribe = list_store.subscribe((value) => {
+        list = value;
+    });
+
+    $: remaining = list.filter((t) => !t.done).length;
 </script>
 
 <main>
@@ -39,6 +48,31 @@
     {:else}
         <p>n居然是偶数</p>
     {/if}
+
+    {#each list as todo}
+        <div class:done={todo.done}>
+            <input
+                type="checkbox"
+                checked={todo.done}
+                on:change={() => (todo.done = !todo.done)}
+            />
+            <input
+                placeholder="what needs to be done?"
+                value={todo.text}
+                on:change={(event) => event.target.value}
+            />
+        </div>
+    {/each}
+
+    <button on:click={() => (list = list.concat({ done: false, text: "" }))}
+        >Add</button
+    >
+
+    <button on:click={() => (list = list.filter((todo) => !todo.done))}
+        >Clear</button
+    >
+
+    <p>{remaining}remaining</p>
 </main>
 
 <style>
